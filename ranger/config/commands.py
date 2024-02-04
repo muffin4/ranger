@@ -1932,7 +1932,10 @@ class yank(Command):
                     ['pbcopy'],
                 ],
             }
-            ordered_managers = ['pbcopy', 'wl-copy', 'xclip', 'xsel']
+            ordered_managers = ['pbcopy']
+            if os.environ.get("WAYLAND_DISPLAY"):
+                ordered_managers += ['wl-copy']
+            ordered_managers += ['xclip', 'xsel']
             executables = get_executables()
             for manager in ordered_managers:
                 if manager in executables:
